@@ -1,4 +1,3 @@
-import random 
 from otree.api import *
 import numpy as np 
 import os

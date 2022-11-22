@@ -86,7 +86,9 @@ class Results(Page):
             total_contribution = sum([p.contribution for p in player.in_all_rounds()]),
             total_payoff_game = sum([p.payoff for p in player.in_all_rounds()]),
             lottery_frac =  str(100*np.mean([1 if p.lottery_status == 'won' else 0 for p in player.in_all_rounds()])) + '%',
-            total_public_share = sum([p.group.individual_share for p in player.in_all_rounds()]) 
+            total_public_share = sum([p.group.individual_share for p in player.in_all_rounds()]),
+            percent_lottery = str(round(100*player.session.config['frac_lottery'])) + "%",
+            percent_public_goods = str((100*(1-player.session.config['frac_lottery']))) + "%", 
         )
     @staticmethod
     def get_timeout_seconds(player):

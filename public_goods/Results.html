@@ -6,11 +6,11 @@
 {{ include C.HISTORY_TEMPLATE }}
 
 <p>
-    You started with an endowment of {{ C.ENDOWMENT }},
+    You started with an endowment of {{ C.ENDOWMENT}},
     of which you contributed {{ player.contribution }}.
     Your group contributed {{ group.total_contribution }},
     resulting in an individual share of {{ group.individual_share }}.
-    {{ C.FRACTION_LOTTERY }} of the total contribution were entered into a lottery. 
+    {{ percent_lottery }} of the total contribution were entered into a lottery. 
     You {{ player.lottery_status }} the lottery. Your lottery earnings are {{ player.lottery_winnings }}
     Your profit is therefore {{ player.payoff }}. <br>
 <br>

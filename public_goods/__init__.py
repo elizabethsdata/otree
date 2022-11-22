@@ -3,6 +3,7 @@ import numpy as np
 import os
 import pathlib
 import string
+import random 
 c = cu
 
 doc = ''

@@ -98,7 +98,7 @@ instance/
 
 # Sphinx documentation
 docs/_build/
-
+*.otreezip
 # PyBuilder
 .pybuilder/
 target/

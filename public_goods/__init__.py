@@ -6,13 +6,13 @@ c = cu
 doc = ''
 
 class C(BaseConstants):
-    NAME_IN_URL = 'public_goods_simple'
+    NAME_IN_URL = 'public_goods'
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 5
     ENDOWMENT = cu(10)
    # MULTIPLIER = 1
     MY_CONSTANT = 0
-    FRACTION_LOTTERY = 0.5
+  #  FRACTION_LOTTERY = 0.5
     HISTORY_TEMPLATE = 'public_goods_simple/history.html'
     HISTORY_CONT_TEMPLATE = 'public_goods_simple/history_cont.html'
     INSTRUCTIONS2_TEMPLATE = 'public_goods_simple/instructions2.html'
@@ -57,7 +57,7 @@ def contribution_max(player):
 class Contribute(Page):
     form_model = 'player'
     form_fields = ['contribution']
-    timeout_seconds = 60
+    
     @staticmethod
     def vars_for_template(player: Player):
         group = player.group
@@ -71,11 +71,13 @@ class Contribute(Page):
             
 
         )
+    @staticmethod
+    def get_timeout_seconds(player):
+        return player.session.config['contribute_page_timeout']
 class ResultsWaitPage(WaitPage):
     after_all_players_arrive = set_payoffs
 class Results(Page):
     form_model = 'player'
-    timeout_seconds = 20
     @staticmethod
     def vars_for_template(player: Player):
         group = player.group
@@ -86,6 +88,9 @@ class Results(Page):
             lottery_frac =  str(100*np.mean([1 if p.lottery_status == 'won' else 0 for p in player.in_all_rounds()])) + '%',
             total_public_share = sum([p.group.individual_share for p in player.in_all_rounds()]) 
         )
+    @staticmethod
+    def get_timeout_seconds(player):
+        return player.session.config['results_page_timeout']
 
 class Instructions(Page):
    @staticmethod

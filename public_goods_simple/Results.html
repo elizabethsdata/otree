@@ -1,0 +1,27 @@
+{{ extends 'global/Page.html' }}
+{{ block title }}<h1>Results</h1> <h6> Round {{player.round_number}} | ID {{player.id_in_group}} </h6>{{ endblock }}
+
+{{ block content }}
+
+{{ include C.HISTORY_TEMPLATE }}
+
+<p>
+    You started with an endowment of {{ C.ENDOWMENT }},
+    of which you contributed {{ player.contribution }}.
+    Your group contributed {{ group.total_contribution }},
+    resulting in an individual share of {{ group.individual_share }}.
+    {{ C.FRACTION_LOTTERY }} of the total contribution were entered into a lottery. 
+    You {{ player.lottery_status }} the lottery. Your lottery earnings are {{ player.lottery_winnings }}
+    Your profit is therefore {{ player.payoff }}. <br>
+<br>
+You {{ player.lottery_status }} the lottery <br>
+Lottery Winnings: {{ player.lottery_winnings }} <br>
+Lottery Pot: {{ group.lottery_pot }} <br>
+Public Goods Pot: {{ group.total_public_good }} <br>
+Total payoff: {{ player.payoff }}
+ 
+</p>
+
+{{ next_button }}
+
+{{ endblock }}

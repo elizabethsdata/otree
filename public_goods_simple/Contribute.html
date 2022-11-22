@@ -1,0 +1,39 @@
+{{ extends 'global/Page.html' }}
+{{ block title }}<h1>Contribute</h1> <h6> Round {{player.round_number}} | ID {{player.id_in_group}} </h6>{{ endblock }}
+
+
+{{ block content }}
+
+
+    {{ num_players }} players per group,
+    an endowment of {{ C.ENDOWMENT }}. <br>
+    <b>{{ percent_lottery }}</b> of your contribution goes to a lottery. <br>
+    <b> {{ percent_public_goods }}</b> of your contribution goes to the public good. 
+   
+</p>
+
+
+{{ formfields }}
+
+{{ next_button }}
+<p>
+    {{ if player.round_number != 1 }}
+    <p> 
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+               History 
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                {{ include C.HISTORY_CONT_TEMPLATE }}  
+              </div>
+            </div>
+          </div>
+        
+
+    </p>
+{{endif}}
+
+{{ endblock }}

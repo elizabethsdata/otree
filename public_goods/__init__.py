@@ -13,9 +13,9 @@ class C(BaseConstants):
    # MULTIPLIER = 1
     MY_CONSTANT = 0
   #  FRACTION_LOTTERY = 0.5
-    HISTORY_TEMPLATE = 'public_goods_simple/history.html'
-    HISTORY_CONT_TEMPLATE = 'public_goods_simple/history_cont.html'
-    INSTRUCTIONS2_TEMPLATE = 'public_goods_simple/instructions2.html'
+    HISTORY_TEMPLATE = 'public_goods/history.html'
+    HISTORY_CONT_TEMPLATE = 'public_goods/history_cont.html'
+    INSTRUCTIONS2_TEMPLATE = 'public_goods/instructions2.html'
 
 class Subsession(BaseSubsession):
     pass

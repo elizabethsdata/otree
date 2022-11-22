@@ -3,10 +3,16 @@ SESSION_CONFIG_DEFAULTS = dict(real_world_currency_per_point=1, participation_fe
 SESSION_CONFIGS = [dict(
     name='my_session',
      num_demo_participants=3,
-     app_sequence=['public_goods', 'survey'],
+     app_sequence=['public_goods', 'mixed_pg_lot', 'full_lot', 'survey'],
      use_browser_bots = False,
      frac_lottery = 0,
+     public_goods_frac_lottery = 0,
+     mixed_pg_lot_frac_lottery = .5,
+     full_lot_frac_lottery = 1,
      multiplier = .5,
+     public_goods_multiplier = .5,
+     mixed_pg_lot_multiplier = .5,
+     full_lot_multiplier = .5,
      contribute_page_timeout = 60,
      results_page_timeout = 25
     ), 

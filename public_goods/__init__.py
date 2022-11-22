@@ -1,12 +1,15 @@
 import random 
 from otree.api import *
 import numpy as np 
+import os
+import pathlib
+import string
 c = cu
 
 doc = ''
 
 class C(BaseConstants):
-    NAME_IN_URL = 'public_goods'
+    NAME_IN_URL = pathlib.PurePath(__file__).parent.name
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 5
     ENDOWMENT = cu(10)
@@ -29,17 +32,17 @@ def set_payoffs(group: Group):
 
     players = group.get_players()
     contributions = [p.contribution for p in players]
-    if sum(contributions) > 0 and group.session.config['frac_lottery'] > 0: 
+    if sum(contributions) > 0 and group.session.config[C.NAME_IN_URL + '_frac_lottery'] > 0: 
         winner = random.choices([p for p in players], weights = contributions, k = 1)[0]
     else: 
         winner = 'nobody'
     group.total_contribution = sum(contributions)
-    group.total_public_good = group.total_contribution*(1- group.session.config['frac_lottery'])
+    group.total_public_good = group.total_contribution*(1- group.session.config[C.NAME_IN_URL + '_frac_lottery'])
     group.individual_share = (
-        group.total_public_good * group.session.config['multiplier']
+        group.total_public_good * group.session.config[C.NAME_IN_URL + '_multiplier']
         
     )
-    group.lottery_pot = group.total_contribution*group.session.config['frac_lottery']
+    group.lottery_pot = group.total_contribution*group.session.config[C.NAME_IN_URL + '_frac_lottery']
     for p in players:
         if p == winner: 
             p.lottery_status = 'won'
@@ -63,8 +66,8 @@ class Contribute(Page):
         group = player.group
         return dict(
             num_players = len(group.get_players()),
-            percent_lottery = str(round(100*player.session.config['frac_lottery'])) + "%",
-            percent_public_goods = str((100*(1-player.session.config['frac_lottery']))) + "%",
+            percent_lottery = str(round(100*player.session.config[C.NAME_IN_URL + '_frac_lottery'])) + "%",
+            percent_public_goods = str((100*(1-player.session.config[C.NAME_IN_URL + '_frac_lottery']))) + "%",
             total_contribution = sum([p.contribution for p in player.in_previous_rounds()]),
             total_payoff_game = sum([p.payoff for p in player.in_previous_rounds()]),
             lottery_frac =  str(100*np.mean([1 if p.lottery_status == 'won' else 0 for p in player.in_previous_rounds()])) + '%'
@@ -87,22 +90,31 @@ class Results(Page):
             total_payoff_game = sum([p.payoff for p in player.in_all_rounds()]),
             lottery_frac =  str(100*np.mean([1 if p.lottery_status == 'won' else 0 for p in player.in_all_rounds()])) + '%',
             total_public_share = sum([p.group.individual_share for p in player.in_all_rounds()]),
-            percent_lottery = str(round(100*player.session.config['frac_lottery'])) + "%",
-            percent_public_goods = str((100*(1-player.session.config['frac_lottery']))) + "%", 
+            percent_lottery = str(round(100*player.session.config[C.NAME_IN_URL + '_frac_lottery'])) + "%",
+            percent_public_goods = str((100*(1-player.session.config[C.NAME_IN_URL + '_frac_lottery']))) + "%", 
         )
     @staticmethod
     def get_timeout_seconds(player):
         return player.session.config['results_page_timeout']
 
 class Instructions(Page):
-   @staticmethod
-   def is_displayed(player: Player):
+    form_model = 'player'
+    @staticmethod
+    def is_displayed(player: Player):
         """
         Skip this page if the round number has exceeded the participant's designated
         number of rounds.
         """
         participant = player.participant
         return player.round_number < 2
+
+    @staticmethod
+    def vars_for_template(player: Player):
+        group = player.group
+        return dict(
+            testvar = pathlib.PurePath(__file__).parent.name
+        )
+
 
 class InstructionsWait(WaitPage):
    @staticmethod

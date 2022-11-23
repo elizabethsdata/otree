@@ -54,9 +54,10 @@ class Player(BasePlayer):
     lottery_winnings = models.CurrencyField(initial=0, label='Lottery Winnings')
     lottery_status = models.StringField(initial='lost', label='Lottery Status')
     total_game = models.CurrencyField(initial = 10, label = 'Balance')
-    contribution = models.CurrencyField(initial = 0, label='How much will you contribute', min=0)
-def contribution_max(player):
-    return (10 + sum([p.payoff for p in player.in_previous_rounds()]))
+    contribution = models.CurrencyField(initial = 0, label='How much will you contribute', min=0, max = 10)
+
+#def contribution_max(player):
+#    return (10 + sum([p.payoff for p in player.in_previous_rounds()]))
 class Contribute(Page):
     form_model = 'player'
     form_fields = ['contribution']
@@ -114,8 +115,6 @@ class Instructions(Page):
         return dict(
             testvar = pathlib.PurePath(__file__).parent.name
         )
-
-
 class InstructionsWait(WaitPage):
    @staticmethod
    def is_displayed(player: Player):
@@ -125,5 +124,8 @@ class InstructionsWait(WaitPage):
         """
         participant = player.participant
         return player.round_number < 2   
-      
+def creating_session(subsession):
+    for p in subsession.get_players():
+        p.participant.label = p.id_in_group
+
 page_sequence = [Instructions, InstructionsWait, Contribute, ResultsWaitPage, Results]

@@ -55,7 +55,7 @@ class Player(BasePlayer):
     lottery_winnings = models.CurrencyField(initial=0, label='Lottery Winnings')
     lottery_status = models.StringField(initial='lost', label='Lottery Status')
     total_game = models.CurrencyField(initial = 10, label = 'Balance')
-    contribution = models.CurrencyField(initial = 0, label='How much will you contribute', min=0, max = 10)
+    contribution = models.CurrencyField(initial = 0, label='How much will you contribute?', min=0, max = 10)
 
 #def contribution_max(player):
 #    return (10 + sum([p.payoff for p in player.in_previous_rounds()]))
@@ -69,7 +69,7 @@ class Contribute(Page):
         return dict(
             num_players = len(group.get_players()),
             percent_lottery = str(round(100*player.session.config[C.NAME_IN_URL + '_frac_lottery'])) + "%",
-            percent_public_goods = str((100*(1-player.session.config[C.NAME_IN_URL + '_frac_lottery']))) + "%",
+            percent_public_goods = str(round((100*(1-player.session.config[C.NAME_IN_URL + '_frac_lottery'])))) + "%",
             total_contribution = sum([p.contribution for p in player.in_previous_rounds()]),
             total_payoff_game = sum([p.payoff for p in player.in_previous_rounds()]),
             lottery_frac =  str(100*np.mean([1 if p.lottery_status == 'won' else 0 for p in player.in_previous_rounds()])) + '%'

@@ -3,10 +3,13 @@
 
 
 {{ block content }}
+<p> 
 
-
-    {{ num_players }} players per group,
-    an endowment of {{ C.ENDOWMENT }}. <br>
+    {{ num_players }} players in the game. <br>
+    Your current balance is <b>{{ player.total_game }}</b>. <br>
+    You may contribute between <b>0</b> and <b>$10</b> to the Public Good. <br>
+     You are able to accrue a negative balance. <br>
+     <br>
     <b>{{ percent_lottery }}</b> of your contribution goes to a lottery. <br>
     <b> {{ percent_public_goods }}</b> of your contribution goes to the public good. 
    
@@ -28,6 +31,16 @@
             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
               <div class="accordion-body">
                 {{ include C.HISTORY_CONT_TEMPLATE }}  
+              </div>
+            </div>
+            <h2 class="accordion-header" id="headingTwo">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne">
+               Instructions 
+              </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                {{ include C.INSTRUCTIONS_TEMPLATE }}  
               </div>
             </div>
           </div>

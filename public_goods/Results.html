@@ -6,22 +6,26 @@
 {{ include C.HISTORY_TEMPLATE }}
 
 <p>
-    You started with an endowment of {{ C.ENDOWMENT}},
-    of which you contributed {{ player.contribution }}.
-    Your group contributed {{ group.total_contribution }},
-    resulting in an individual share of {{ group.individual_share }}.
+    Last round, you contributed <b>{{ player.contribution }}</b> to the public good. 
+    In total, players contributed {{ group.total_contribution }} to the public good,
+    resulting in an individual share of {{ group.individual_share }}. 
     {{ percent_lottery }} of the total contribution were entered into a lottery. 
-    You {{ player.lottery_status }} the lottery. Your lottery earnings are {{ player.lottery_winnings }}
-    Your profit is therefore {{ player.payoff }}. <br>
+    You <b>{{ player.lottery_status }} </b> the lottery. Your lottery earnings are {{ player.lottery_winnings }}
+    Your profit is therefore {{ player.payoff }}. Your current balance is <b>{{player.total_game}}</b><br>
 <br>
-You {{ player.lottery_status }} the lottery <br>
-Lottery Winnings: {{ player.lottery_winnings }} <br>
-Lottery Pot: {{ group.lottery_pot }} <br>
+<b> You {{ player.lottery_status }} the lottery </b> <br>
+Lottery Pot: <b>{{ group.lottery_pot }}</b> <br>
 Public Goods Pot: {{ group.total_public_good }} <br>
-Total payoff: {{ player.payoff }}
+Public Goods Winnings: {{ player.group.individual_share }} <br>
+Total Contributed: {{player.contribution}} <br>
+Total Profit: {{player.payoff}} <br>
+Current Balance: <b>{{ player.total_game }} </b><br>
  
 </p>
 
 {{ next_button }}
-
+<p>
+    <b>NOTE:</b> If you are in a pure Public Goods round, you cannot win the lottery in the first place. <br>
+    Please ignore all lotery related data. 
+</p>
 {{ endblock }}

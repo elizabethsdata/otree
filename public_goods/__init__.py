@@ -19,6 +19,7 @@ class C(BaseConstants):
     HISTORY_TEMPLATE = 'public_goods/history.html'
     HISTORY_CONT_TEMPLATE = 'public_goods/history_cont.html'
     INSTRUCTIONS2_TEMPLATE = 'public_goods/instructions2.html'
+    INSTRUCTIONS_TEMPLATE = 'public_goods/' + pathlib.PurePath(__file__).parent.name + '.html'
 
 class Subsession(BaseSubsession):
     pass

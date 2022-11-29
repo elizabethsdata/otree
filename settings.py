@@ -1,7 +1,7 @@
 from os import environ
 SESSION_CONFIG_DEFAULTS = dict(real_world_currency_per_point=1, participation_fee=0)
 SESSION_CONFIGS = [dict(
-    name='my_session',
+    name='prod_game',
      num_demo_participants=3,
      app_sequence=['public_goods', 'mixed_pg_lot', 'full_lot', 'survey'],
      use_browser_bots = False,
@@ -13,8 +13,8 @@ SESSION_CONFIGS = [dict(
      public_goods_multiplier = .5,
      mixed_pg_lot_multiplier = .5,
      full_lot_multiplier = .5,
-     contribute_page_timeout = 60,
-     results_page_timeout = 25
+    # contribute_page_timeout = 60,
+    # results_page_timeout = 25
     ), 
     dict(
      name = "pure_pg_5x",

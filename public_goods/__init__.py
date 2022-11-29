@@ -76,9 +76,9 @@ class Contribute(Page):
             
 
         )
-    @staticmethod
-    def get_timeout_seconds(player):
-        return player.session.config['contribute_page_timeout']
+  #  @staticmethod
+  #  def get_timeout_seconds(player):
+  #      return player.session.config['contribute_page_timeout']
 class ResultsWaitPage(WaitPage):
     after_all_players_arrive = set_payoffs
 class Results(Page):
@@ -95,9 +95,9 @@ class Results(Page):
             percent_lottery = str(round(100*player.session.config[C.NAME_IN_URL + '_frac_lottery'])) + "%",
             percent_public_goods = str((100*(1-player.session.config[C.NAME_IN_URL + '_frac_lottery']))) + "%", 
         )
-    @staticmethod
-    def get_timeout_seconds(player):
-        return player.session.config['results_page_timeout']
+  #  @staticmethod
+  # def get_timeout_seconds(player):
+  #     return player.session.config['results_page_timeout']
 
 class Instructions(Page):
     form_model = 'player'

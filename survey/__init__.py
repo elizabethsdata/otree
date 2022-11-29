@@ -13,14 +13,18 @@ class Group(BaseGroup):
     pass
 class Player(BasePlayer):
     age = models.IntegerField(label='What is your age', max=125, min=13)
+    econ = models.BooleanField(label='Are you, or do you plan to be, an economics major?')
     gender = models.StringField(choices=[['Male', 'Male'], ['Female', 'Female']], label='What is your gender', widget=widgets.RadioSelect)
-    crt_bat = models.IntegerField(label='A bat and a ball cost 22 dollars in total The bat costs 20 dollars more than the ball How many dollars does the ball cost')
-    crt_widget = models.IntegerField(label='If it takes 5 machines 5 minutes to make 5 widgets how many minutes would it take 100 machines to make 100 widgets')
-    crt_lake = models.IntegerField(label='In a lake there is a patch of lily pads Every day the patch doubles in size If it takes 48 days for the patch to cover the entire lake how many days would it take for the patch to cover half of the lake')
+    lotto = models.StringField(choices=[['0', 'Zero'], ['1', '1'], ['2', '2'], ['3', '3'], ['4', '4'], ['5+', '5 or more times']], label='How many times have you played the lottery in the past year?', widget=widgets.RadioSelect)
+    risk_seeking = models.StringField(choices=[['Highly Risk Seeking', 'Highly Risk Seeking'], ['Somewhat Risk Seeking', 'Somewhat Risk Seeking'], ['Neutral', 'Neutral'], ['Somewhat Risk Averse', 'Somewhat Risk Averse'], ['Highly Risk Averse', 'Highly Risk Averse']], label='Do you consider yourself to be risk seeking or risk averse?', widget=widgets.RadioSelect)
+    fair = models.IntegerField(label = 'In a pure public good scenario like stage one of our experiment, what is the “fair” contribution level out of $10 (you may define “fair” however you like)?', min=0, max=10)
+    candidate = models.BooleanField(label = 'Have you ever donated to a political campaign?')
+    charity = models.BooleanField(label = 'Have you ever donated significant sums of money or time to a charity?')
+    rate_us = models.IntegerField(label = 'How would you rate your overall experience in this experiment?', min=1, max=10)
+    pumpkin = models.IntegerField(label = 'On a scale from 1-10, how much do you enjoy going to a pumpkin patch?', min=1, max=10)
+
 class Demographics(Page):
     form_model = 'player'
-    form_fields = ['age', 'gender']
-class CognitiveReflectionTest(Page):
-    form_model = 'player'
-    form_fields = ['crt_bat', 'crt_widget', 'crt_lake']
-page_sequence = [Demographics, CognitiveReflectionTest]
+    form_fields = ['age', 'gender', 'econ', 'lotto','candidate', 'charity', 'risk_seeking', 'fair', 'pumpkin', 'rate_us']
+
+page_sequence = [Demographics]

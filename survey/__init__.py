@@ -26,5 +26,7 @@ class Player(BasePlayer):
 class Demographics(Page):
     form_model = 'player'
     form_fields = ['age', 'gender', 'econ', 'lotto','candidate', 'charity', 'risk_seeking', 'fair', 'pumpkin', 'rate_us']
-
+def creating_session(subsession):
+    for p in subsession.get_players():
+        p.participant.label = p.id_in_group
 page_sequence = [Demographics]

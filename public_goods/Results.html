@@ -11,13 +11,13 @@
     resulting in an individual share of <b>{{ group.individual_share }}</b>. <br>
     {{ percent_lottery }} of the total contribution were entered into a lottery. 
     You <b>{{ player.lottery_status }} </b> the lottery. Your lottery earnings are {{ player.lottery_winnings }}
-    Your profit is therefore {{ player.payoff }}. Your current balance is <b>{{player.total_game}}</b><br>
+    Your profit is therefore <p>{{ player.payoff }}</p>. Your current balance is <b>{{player.total_game}}</b><br>
 <br>
 <b> You {{ player.lottery_status }} the lottery </b> <br>
 Lottery Pot: <b>{{ group.lottery_pot }}</b> <br>
 Public Goods Pot: {{ group.total_public_good }} <br>
 Public Goods Winnings: <b>{{ player.group.individual_share }} </b> <br>
-Total Contributed: {{player.contribution}} <br>
+Your Contribution: {{player.contribution}} <br>
 Total Profit: <b>{{player.payoff}}</b> <br>
 Current Balance: <b>{{ player.total_game }} </b><br>
  

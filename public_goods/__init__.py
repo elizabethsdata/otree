@@ -129,4 +129,5 @@ def creating_session(subsession):
     for p in subsession.get_players():
         p.participant.label = p.id_in_group
 
+
 page_sequence = [Instructions, InstructionsWait, Contribute, ResultsWaitPage, Results]
